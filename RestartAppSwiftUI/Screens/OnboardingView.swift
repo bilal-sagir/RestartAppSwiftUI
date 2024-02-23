@@ -11,10 +11,9 @@ struct OnboardingView: View {
     
     // MARK: - PROPERTIES
     @AppStorage("onboarding") var isOnboardingViewActive: Bool = true
-    
     @State private var buttonWidth: Double = UIScreen.main.bounds.width - 80
-    
     @State private var buttonOffset: CGFloat = 0
+    @State private var isAnimating: Bool = false
     
     var body: some View {
         ZStack {
@@ -40,7 +39,10 @@ how much love we put into giving.
                     .foregroundStyle(.white)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 10)
-                } //: HEADER
+                }//: HEADER
+                .opacity(isAnimating ? 1 : 0)
+                .offset(y: isAnimating ? 0 : -40)
+                .animation(.easeOut(duration: 1), value: isAnimating)
                 
                 //MARK: - CENTER
                 ZStack {
@@ -51,6 +53,8 @@ how much love we put into giving.
                     Image("character-1")
                         .resizable()
                         .scaledToFit()
+                        .opacity(isAnimating ? 1 : 0)
+                        .animation(.easeOut(duration: 0.75), value: isAnimating)
                 } //: CENTER
                 Spacer()
                 
@@ -119,8 +123,14 @@ how much love we put into giving.
                 } //: FOOTER
                 .frame(width: buttonWidth, height: 80, alignment: .center)
                 .padding()
+                .opacity(isAnimating ? 1 : 0)
+                .offset(y: isAnimating ? 0 : 40)
+                .animation(.easeOut(duration: 1), value: isAnimating)
             } //: VSTACK
         } //: ZSTACK
+        .onAppear(perform: {
+            isAnimating = true
+        })
     }
 }
 
