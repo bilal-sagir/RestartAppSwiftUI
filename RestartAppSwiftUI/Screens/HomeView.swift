@@ -37,6 +37,7 @@ struct HomeView: View {
             // MARK: - FOOTER
             Spacer()
             Button(action: {
+                playSound(sound: "success", type: "m4a")
                 isOnboardingViewActive = true
             }, label: {
                 Image(systemName: "arrow.triangle.2.circlepath.circle.fill")
@@ -54,6 +55,7 @@ struct HomeView: View {
                 isAnimating = true
             })
         })
+        .padding(.bottom, 16)
     }
 }
 

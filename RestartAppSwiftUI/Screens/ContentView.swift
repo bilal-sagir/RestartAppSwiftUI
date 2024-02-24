@@ -20,6 +20,7 @@ struct ContentView: View {
             }
         }
         .animation(.easeIn(duration: 0.5), value: isOnboardingViewActive)
+        .preferredColorScheme(.light)
     }
 }
 
